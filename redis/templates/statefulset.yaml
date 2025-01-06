@@ -1,29 +1,30 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongodb
+  name: redis
+  namespace: roboshop
   labels:
-    app: mongodb
+    app: redis
     project: roboshop
     tier: database
 spec:
   selector:
     matchLabels:
-      app: mongodb
+      app: redis
       project: roboshop
       tier: database # has to match .spec.template.metadata.labels
-  serviceName: "mongodb"
+  serviceName: "redis"
   replicas: {{ .Values.statefulset.replicas}} # by default is 1
   template:
     metadata:
       labels:
-        app: mongodb
+        app: redis
         project: roboshop
         tier: database
     spec:
       containers:
-      - name: mongodb
-        image: "nanda1805/mongodb: {{ .Values.statefulset.imageVersion }}"
+      - name: redis
+        image: "nanda1805/redis: {{ .Values.statefulset.imageVersion }}"
         volumeMounts:
         - name: www
           mountPath: /data/db

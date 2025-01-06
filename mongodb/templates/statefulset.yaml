@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: roboshop
+  labels:
+    app: mongodb
+    project: roboshop
+    tier: database
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+      project: roboshop
+      tier: database # has to match .spec.template.metadata.labels
+  serviceName: "mongodb"
+  replicas: {{ .Values.statefulset.replicas}} # by default is 1
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        project: roboshop
+        tier: database
+    spec:
+      containers:
+      - name: mongodb
+        image: "nanda1805/mongodb: {{ .Values.statefulset.imageVersion }}"
+        volumeMounts:
+        - name: www
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ebs-sc"
+      resources:
+        requests:
+          storage: 1Gi
+
