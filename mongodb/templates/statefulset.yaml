@@ -26,11 +26,11 @@ spec:
       - name: mongodb
         image: "nanda1805/mongodb: {{ .Values.statefulset.imageVersion }}"
         volumeMounts:
-        - name: www
+        - name: mongodb
           mountPath: /data/db
   volumeClaimTemplates:
   - metadata:
-      name: www
+      name: mongodb
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: "ebs-sc"

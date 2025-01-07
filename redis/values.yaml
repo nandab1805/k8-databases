@@ -1,3 +1,2 @@
-StatefulSet:
-  replicas: 3
-  imageVersion: v1
+statefulset:
+  replicas: 2
