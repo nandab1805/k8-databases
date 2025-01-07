@@ -1,0 +1,19 @@
+# kubectl get configmap aws-auth  -n kube-system -o yaml ,we want to run super puttr command to get the output
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::755740020274:role/eksctl-roboshop-nodegroup-spot-NodeInstanceRole-lsSdAN0LgklL
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - groups:
+      - roboshop-pod-reader
+      userarn: arn:aws:iam::755740020274:user/kiran
+      username: kiran
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+  uid: fa8e80ee-335a-48d0-88fa-74eaf98640be
