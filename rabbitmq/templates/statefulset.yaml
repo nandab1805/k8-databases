@@ -26,8 +26,8 @@ spec:
       - name: rabbitmq
         image: "nanda1805/rabbitmq:{{ .Values.statefulset.imageVersion }}"
         envFrom:
-      - secretRef:
-          name: rabbitmq-secret
+        - secretRef:
+            name: rabbitmq-secret
         volumeMounts:
         - name: rabbitmq
           mountPath: /data/db
@@ -40,4 +40,3 @@ spec:
       resources:
         requests:
           storage: 1Gi
-
