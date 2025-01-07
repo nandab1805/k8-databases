@@ -25,6 +25,7 @@ spec:
       containers:
       - name: rabbitmq
         image: "nanda1805/rabbitmq:{{ .Values.statefulset.imageVersion }}"
+        envFrom:
       - secretRef:
           name: rabbitmq-secret
         volumeMounts:
