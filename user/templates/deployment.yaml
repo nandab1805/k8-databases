@@ -26,6 +26,13 @@ spec:
       - name: user
         image: nanda1805/user:{{ .Values.deployment.imageVersion }}
         imagePullPolicy: Always #Always, IfNotPresent, Never it will pull the image from the docker hub
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "128m"
+          limits:
+            memory: "100Mi"
+            cpu: "256m"
         envFrom:
         - configMapRef:
             name: user
