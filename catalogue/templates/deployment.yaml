@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: catalogue
-        image: "nanda1805/catalogue: {{ .Values.deployment.imageVersion }}"
+        image: "nanda1805/catalogue:{{ .Values.deployment.imageVersion }}"
         imagePullPolicy: Always #Always, IfNotPresent, Never it will pull the image from the docker hub
         envFrom:
         - configMapRef:
