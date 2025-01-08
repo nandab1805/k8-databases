@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping
+  namespace: roboshop
+  labels:
+    app: shipping
+    project: roboshop
+    tier: app
+spec:
+  # modify replicas according to your case
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels: #these labels are used to find the pods
+     app: shipping
+     project: roboshop
+     tier: app
+  template: #pod definition
+    metadata:
+      labels: #these labels are pods labels
+        app: shipping
+        project: roboshop
+        tier: app
+    spec:
+      containers:
+      - name: shipping
+        image: "nanda1805/shipping:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always #Always, IfNotPresent, Never it will pull the image from the docker hub
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "128m"
+          limits:
+            memory: "100Mi"
+            cpu: "256m"
+        envFrom:
+        - configMapRef:
+            name: shipping
