@@ -28,11 +28,11 @@ spec:
         imagePullPolicy: Always #Always, IfNotPresent, Never it will pull the image from the docker hub
         resources:
           requests:
-            memory: "150Mi"
-            cpu: "256m"
+            memory: "256Mi"
+            cpu: "500m"
           limits:
-            memory: "300Mi"
-            cpu: "512m"
+            memory: "512Mi"
+            cpu: "1000m"
         envFrom:
         - configMapRef:
             name: shipping
