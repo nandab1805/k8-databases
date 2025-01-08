@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  namespace: roboshop
+  labels:
+    app: user
+    project: roboshop
+    tier: app
+spec:
+  # modify replicas according to your case
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels: #these labels are used to find the pods
+     app: user
+     project: roboshop
+     tier: app
+  template: #pod definition
+    metadata:
+      labels: #these labels are pods labels
+        app: user
+        project: roboshop
+        tier: app
+    spec:
+      containers:
+      - name: user
+        image: nanda1805/user:{{ .Values.deployment.imageVersion }}
+        imagePullPolicy: Always #Always, IfNotPresent, Never it will pull the image from the docker hub
+        envFrom:
+        - configMapRef:
+            name: user
